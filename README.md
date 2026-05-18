@@ -16,10 +16,10 @@ pillar_roots:
 
 ## cfgmgmt-template integration
 
-if you are using our [cfgmgmt-template](https://github.com/darix/cfgmgmt-template) as a starting point the saltmaster you can simplify the setup with:
+if you are using our [cfgmgmt-template](https://codeberg.org/salted-geeko/cfgmgmt-template) as a starting point the saltmaster you can simplify the setup with:
 
 ```
-git submodule add https://github.com/darix/barsandsquiggles formulas/barsandsquiggles
+git submodule add https://codeberg.org/salted-geeko/barsandsquiggles formulas/barsandsquiggles
 ln -s /srv/cfgmgmt/formulas/barsandsquiggles/config/enable_barsandsquiggles.conf /etc/salt/master.d/
 systemctl restart saltmaster
 ```
