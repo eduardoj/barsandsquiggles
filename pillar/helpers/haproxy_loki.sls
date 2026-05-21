@@ -16,7 +16,8 @@
       - '{{ bind_ip }}:{{ proxy_protocol_listen_port }} tfo accept-proxy'
       {%- endfor %}
       timeouts:
-        client: 1h
+        client: 150m
+        server: 150m
       servers:
         # for each node matching the target it will count up the loop index and append that to the server name
         loki-{{ protocol_name }}:
