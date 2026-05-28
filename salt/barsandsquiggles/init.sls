@@ -223,11 +223,15 @@ class LokiService(GrafanaAppService):
 
   def merge_in_ssl_settings(self, config_block):
     ssl_config = {}
+
+    if not(__salt__['pillar.get'](f"{self.appname}:tls:enable", True)):
+      return config_block
+
     ssl_server = __salt__['pillar.get'](f"{self.appname}:tls:server", {})
     ssl_client = __salt__['pillar.get'](f"{self.appname}:tls:client", {})
     # log.error(f"server:{ssl_server} client:{ssl_client}")
 
-    ca_file           = __salt__['pillar.get'](f"{self.appname}:tls:ca_path", None)
+    ca_file           = __salt__['pillar.get'](f"{self.appname}:tls:ca_path", '/etc/ssl/ca-bundle.pem')
     tls_min_version   = __salt__['pillar.get'](f"{self.appname}:tls:tls_min_version",   "VersionTLS13")
     tls_cipher_suites = __salt__['pillar.get'](f"{self.appname}:tls:tls_cipher_suites", "TLS_CHACHA20_POLY1305_SHA256")
 
