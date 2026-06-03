@@ -108,9 +108,14 @@ def run():
       vector_service_requires.extend(additional_requires)
       vector_service_requires = list(set(vector_service_requires))
 
+    vector_service_name = 'vector.service'
+
+    if __salt__['pillar.get']('vector:use_hardened_service', False):
+      vector_service_name = 'hardened-vector.service'
+
     config['vector_service'] = {
       'service.running': [
-        {'name':    'vector.service'},
+        {'name':    vector_service_name},
         {'reload':  True},
         {'enable':  True},
         {'require': vector_service_requires},
