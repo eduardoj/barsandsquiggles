@@ -86,6 +86,9 @@ def run():
       ]
     }
 
+    vector_service_requires = ['vector_config', 'vector_defaults']
+    vector_service_watch    = ['vector_config', 'vector_defaults']
+
     vector_additional_groups = __salt__['pillar.get']('vector:additional_groups', [])
     if len(vector_additional_groups) > 0:
       vector_groups = get_group_list("vector")
@@ -97,11 +100,11 @@ def run():
           {'name':       'vector'},
           {'groups':     vector_groups},
           {'require_in': ['vector_service']},
+          {'watch_in': ['vector_service']},
         ]
       }
-
-    vector_service_requires = ['vector_config', 'vector_defaults']
-    vector_service_watch    = ['vector_config', 'vector_defaults']
+      vector_service_watch.append('vector_additional_groups')
+      vector_service_requires.append('vector_additional_groups')
 
     additional_requires = __salt__['pillar.get']('vector:requires', [])
     if len(additional_requires) > 0:
