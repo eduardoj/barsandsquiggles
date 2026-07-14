@@ -120,7 +120,8 @@ def run():
     config['vector_service'] = {
       'service.running': [
         {'name':    vector_service_name},
-        {'reload':  True},
+        # reload is disabled because new sinks/sources arent enabled
+        # {'reload':  True},
         {'enable':  True},
         {'require': vector_service_requires},
         {'watch':   vector_service_watch},
